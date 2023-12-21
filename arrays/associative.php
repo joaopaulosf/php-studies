@@ -35,7 +35,7 @@ $bookList = [
     foreach ($bookList as $book): ?>
         <li>
             <a href="<?= $book['purchaseUrl'] ?>">
-                <?= $book['name'] ?>
+                <?= $book['name'] ?> ( <?= $book['author'] ?> )
             </a>
         </li>
     <?php
