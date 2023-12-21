@@ -49,6 +49,7 @@ $filter = function (array $data, $fn): array {
     return $filteredData;
 };
 
+// array_filter() do the same;
 $filteredBooks = $filter(
     $bookList,
     $fn = function ($data) {
