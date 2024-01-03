@@ -11,7 +11,7 @@ $pwd = $_ENV['DB_PASSWORD'];
 
 // dsn = data source name.
 $pdo = new PDO($dsn, $username, $pwd);
-$statement = $pdo->prepare("SELECT * FROM myapp.POSTS");
+$statement = $pdo->prepare('SELECT * FROM myapp.POSTS');
 $statement->execute();
 $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
