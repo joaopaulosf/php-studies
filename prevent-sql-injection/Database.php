@@ -12,7 +12,7 @@ class Database
         ]);
     }
 
-    public function query(string $query, $params = []): PDOStatement|bool
+    public function query(string $query, array $params = []): PDOStatement|bool
     {
         $statement = $this->connection->prepare($query);
         $statement->execute($params);
