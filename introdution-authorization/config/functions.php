@@ -12,3 +12,10 @@ function urlIs(string $value): bool
 {
     return $_SERVER['REQUEST_URI'] === $value;
 }
+
+function authorized($condition): void
+{
+    if (!$condition) {
+        abort(Response::FORBIDDEN);
+    }
+}

@@ -3,6 +3,7 @@
 class Database
 {
     public PDO $connection;
+    public false|PDOStatement $statement;
 
     public function __construct(array $config)
     {
@@ -12,11 +13,38 @@ class Database
         ]);
     }
 
-    public function query(string $query, array $params = []): PDOStatement|bool
+    public function query(string $query, array $params = []): Database
     {
-        $statement = $this->connection->prepare($query);
-        $statement->execute($params);
+        $this->statement = $this->connection->prepare($query);
+        $this->statement->execute($params);
 
-        return $statement;
+        return $this;
+    }
+
+    public function findOrNot($queryResult): void
+    {
+        $find = $queryResult;
+
+        if (!$find) {
+            abort(Response::NOT_FOUND);
+        }
+    }
+
+    public function get(): array
+    {
+        $queryResult = $this->statement->fetch();
+
+        $this->findOrNot($queryResult);
+
+        return $queryResult;
+    }
+
+    public function getAll(): array
+    {
+        $queryResult = $this->statement->fetchAll();
+
+        $this->findOrNot($queryResult);
+
+        return $queryResult;
     }
 }
