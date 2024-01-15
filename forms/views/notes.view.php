@@ -18,7 +18,7 @@ require 'partials/head.php' ?>
                 <?php endforeach; ?>
             </ul>
             <div class="mt-6">
-                <a class="text-blue-500 hover:underline" href="/note/note-create">New note</a>
+                <a class="text-blue-500 hover:underline" href="/notes/create">New note</a>
             </div>
         </div>
     </main>
