@@ -1,5 +1,6 @@
 <?php
 
+require 'Validator.php';
 $heading = 'New Note';
 $config = require 'config.php';
 
@@ -10,16 +11,12 @@ $currentUserId = 3;
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = [];
 
-    if (strlen($_POST['title']) === 0) {
-        $errors['title'] = 'A title is required';
+    if (!Validator::string($_POST['title'], 1, 100)) {
+        $errors['title'] = 'A title of no more than 100 characters is required';
     }
 
-    if (strlen($_POST['body']) === 0) {
-        $errors['body'] = 'A body is required';
-    }
-
-    if (strlen($_POST['body']) > 1000) {
-        $errors['body'] = 'The body can not be more than 1,000 characters.';
+    if (!Validator::string($_POST['body'], 1, 1000)) {
+        $errors['body'] = 'A body of no more than 1,000 characters is required';
     }
 
     if (empty($errors)) {
