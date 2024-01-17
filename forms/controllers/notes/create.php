@@ -1,16 +1,11 @@
 <?php
 
-require 'Validator.php';
-$heading = 'New Note';
-$config = require 'config.php';
+$config = require base_path('config/index.php');
 
 $db = new Database($config);
-
-$currentUserId = 3;
+$errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $errors = [];
-
     if (!Validator::string($_POST['title'], 1, 100)) {
         $errors['title'] = 'A title of no more than 100 characters is required';
     }
@@ -24,11 +19,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             [
                 'title' => htmlspecialchars($_POST["title"]),
                 'body' => htmlspecialchars($_POST["body"]),
-                'user_id' => $currentUserId
+                'user_id' => 3
             ]
         );
     }
 }
 
-require "views/notes/create.view.php";
+view('notes/create.view.php', [
+    'heading' => 'New Note',
+    'errors' => $errors
+]);
 

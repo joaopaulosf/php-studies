@@ -19,3 +19,15 @@ function authorized($condition): void
         abort(Response::FORBIDDEN);
     }
 }
+
+function base_path($path): string
+{
+    return BASE_PATH . $path;
+}
+
+function view($path, $attributes = []): void
+{
+    extract($attributes);
+
+    require base_path('views/' . $path);
+}

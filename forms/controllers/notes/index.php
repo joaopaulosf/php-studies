@@ -1,7 +1,6 @@
 <?php
 
-$heading = 'My Notes';
-$config = require 'config.php';
+$config = require base_path('config/index.php');
 
 $db = new Database($config);
 
@@ -9,4 +8,7 @@ $notes = $db->query('SELECT id, title, user_id FROM NOTES WHERE user_id = :curre
     'currentUserId' => 3
 ])->getAll();
 
-require "views/notes/index.view.php";
+view('notes/index.view.php', [
+    'heading' => 'My Notes',
+    'notes' => $notes
+]);
