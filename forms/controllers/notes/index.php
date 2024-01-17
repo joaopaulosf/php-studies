@@ -9,4 +9,4 @@ $notes = $db->query('SELECT id, title, user_id FROM NOTES WHERE user_id = :curre
     'currentUserId' => 3
 ])->getAll();
 
-require "views/notes.view.php";
+require "views/notes/index.view.php";
