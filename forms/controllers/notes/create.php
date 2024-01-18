@@ -1,5 +1,8 @@
 <?php
 
+use Core\Database;
+use Core\Validator;
+
 $config = require base_path('config/index.php');
 
 $db = new Database($config);
@@ -29,4 +32,3 @@ view('notes/create.view.php', [
     'heading' => 'New Note',
     'errors' => $errors
 ]);
-
