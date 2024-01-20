@@ -14,7 +14,7 @@ function routeToController($uri, $routes): void
 #[NoReturn] function abort(int $code = 404): void
 {
     http_response_code($code);
-    require "views/{$code}.php";
+    require base_path("views/{$code}.php");
     die();
 }
 

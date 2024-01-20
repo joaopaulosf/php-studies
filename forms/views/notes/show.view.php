@@ -13,6 +13,10 @@ require base_path('views/partials/head.php') ?>
             <h2 class="text-lg font-medium"><?= $note['title'] ?></h2>
             <p class="text-base py-3"><?= $note['body'] ?></p>
             <p class="text-xs font-bold "><?= $note['created_at'] ?></p>
+            <form class="mt-6" method="POST">
+                <input type="hidden" name="id" value="<?= $note['id'] ?>">
+                <button class="text-sm text-red-500" type="submit">Delete</button>
+            </form>
         </div>
     </main>
 </div>
