@@ -1,10 +1,9 @@
 <?php
 
+use Core\App;
 use Core\Database;
 
-$config = require base_path('config/index.php');
-
-$db = new Database($config);
+$db = App::resolve(Database::class);
 
 $notes = $db->query('SELECT id, title, user_id FROM NOTES WHERE user_id = :currentUserId', [
     'currentUserId' => 3
