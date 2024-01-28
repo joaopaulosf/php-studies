@@ -1,6 +1,6 @@
 # PHP Studies
 
-![php](https://img.shields.io/badge/php-8.3-blue)
+![php](https://img.shields.io/badge/PHP-8.3-blue)
 
 ## Topic list
 
