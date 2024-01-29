@@ -34,3 +34,4 @@
 - Make Your First Service Containers
 - Updating With PATCH Requests
 - PHP Sessions
+- Register New User Route
