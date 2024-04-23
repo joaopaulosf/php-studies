@@ -36,3 +36,4 @@
 - PHP Sessions
 - Register New User Route
 - Middleware
+- Log In and Log Outs
