@@ -41,3 +41,11 @@ function view($path, $attributes = []): void
 
     require base_path('views/' . $path);
 }
+
+function login($user): void
+{
+    $_SESSION['user'] = [
+        'username' => $user['username'],
+        'email' => $user['email']
+    ];
+}

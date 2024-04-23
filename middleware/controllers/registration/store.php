@@ -34,17 +34,18 @@ $user = $db->query('SELECT * FROM USERS WHERE email = :email', [
     'email' => $email
 ])->find();
 
-    if (!$user) {
+if (!$user) {
     $db->query('INSERT INTO USERS (username, pwd, email) VALUES (:username, :password, :email)', [
         'username' => $username,
-        'password' => $password,
+        'password' => password_hash($password,PASSWORD_BCRYPT),
         'email' => $email
     ]);
 
-    $_SESSION['user'] = [
+    login([
+        'email' => $email,
         'username' => $username
-    ];
-
+    ]);
 }
+
 header('location: /');
 exit();
