@@ -20,10 +20,12 @@
                            class="<?= urlIs(
                                '/about'
                            ) ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">About</a>
-                        <a href="/notes"
-                           class="<?= urlIs(
-                               '/notes'
-                           ) ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Notes</a>
+                        <?php if($_SESSION['user'] ?? false): ?>
+                            <a href="/notes"
+                               class="<?= urlIs(
+                                   '/notes'
+                               ) ? 'bg-gray-900 text-white' : 'text-gray-300' ?> hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Notes</a>
+                        <?php endif; ?>
                         <a href="/contact"
                            class="<?= urlIs(
                                '/contact'
@@ -48,7 +50,7 @@
                     <!-- Profile dropdown -->
                     <div class="relative ml-3">
                         <div class="flex items-center gap-3">
-                            <?php if ($_SESSION['user']['username'] ?? false) : ?>
+                            <?php if ($_SESSION['user'] ?? false) : ?>
                                 <button type="button"
                                         class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm
                                     focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2
@@ -59,8 +61,15 @@
                                     <img class="h-8 w-8 rounded-full"
                                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                                          alt="">
-                                </button type="button">
+                                </button>
                                 <p class="text-white font-medium"><?= $_SESSION['user']['username'] ?></p>
+                                <div>
+                                    <form method="POST" action="/session">
+                                        <input type="hidden" name="_method" value="DELETE"/>
+
+                                        <button class="text-white hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Log Out</button>
+                                    </form>
+                                </div>
                             <?php else : ?>
                                 <a href="/register"
                                    class="<?= urlIs(

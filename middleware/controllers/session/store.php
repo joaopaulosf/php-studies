@@ -14,7 +14,7 @@ if (!Validator::email($email)) {
     $errors['email'] = 'Please enter a valid email address';
 }
 
-if (!Validator::string($password, 7, 255)) {
+if (!Validator::string($password)) {
     $errors['password'] = 'Please provide a valid password';
 }
 
@@ -28,15 +28,26 @@ $user = $db->query('SELECT * FROM USERS WHERE email = :email', [
     'email' => $email
 ])->find();
 
-if (! $user) {
-    view('session/create.view.php', [
-        'errors' => [
-            'email' => 'No matching account for that email address.'
-        ]
-    ]);
+if ($user) {
+    if( password_verify($password, $user['pwd'])) {
+        login([
+            'username' => $user['username'],
+            'email' => $user['email']
+        ]);
+
+        header('location: /');
+        exit();
+    }
 }
 
-login([
-    'email' => $email,
-    'username' => $username
+view('session/create.view.php', [
+    'errors' => [
+        'email' => 'No matching account for that email address and password.'
+    ]
 ]);
+
+
+
+
+
+
